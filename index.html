@@ -13,12 +13,13 @@
     color: var(--ink); min-height: 100vh; }
   .serif { font-family: "Playfair Display", "Noto Serif SC", Georgia, serif; }
   .wrap { max-width: 560px; margin: 0 auto; padding: 22px 20px 60px; }
-  .top { display: flex; justify-content: space-between; align-items: center; }
-  .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; letter-spacing: .02em; }
-  .brand .sq { background: var(--ink); color: #fff; font-size: 11px; padding: 5px 7px; border-radius: 4px; }
-  .brand small { display: block; font-weight: 500; font-size: 9.5px; color: var(--muted); letter-spacing: .12em; }
-  .lang { border: 1px solid var(--ink); background: transparent; padding: 6px 12px; border-radius: 999px;
-    font-size: 12.5px; font-weight: 700; cursor: pointer; }
+  .top { position: relative; text-align: center; padding-top: 6px; }
+  .brand img { height: 84px; width: 84px; object-fit: cover; border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+  .brand small { display: block; font-weight: 600; font-size: 10px; color: var(--muted);
+    letter-spacing: .22em; margin-top: 8px; }
+  .lang { position: absolute; right: 0; top: 6px; border: 1px solid var(--ink); background: transparent;
+    padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; cursor: pointer; }
   .bar { height: 4px; background: var(--line); border-radius: 2px; margin-top: 18px; overflow: hidden; }
   .bar i { display: block; height: 100%; width: 0%; background: var(--ink); transition: width .3s; }
   .screen { display: none; }
@@ -26,13 +27,37 @@
   @keyframes fade { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: none; } }
 
   /* intro */
-  h1 { font-size: 33px; line-height: 1.18; margin-top: 34px; font-weight: 800; }
-  .promise { margin-top: 14px; font-size: 16.5px; color: #333; line-height: 1.6; }
-  .meta { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+  h1 { font-size: 32px; line-height: 1.2; margin-top: 26px; font-weight: 800; text-align: center; }
+  .promise { margin-top: 12px; font-size: 16px; color: #333; line-height: 1.6; text-align: center; }
+  .meta { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
   .chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 13px; font-size: 12.5px; color: #444; }
-  .cta { display: block; width: 100%; margin-top: 26px; background: var(--ink); color: #fff; border: none;
+  .cta { display: block; width: 100%; margin-top: 24px; background: var(--ink); color: #fff; border: none;
     padding: 17px; font-size: 17px; font-weight: 800; border-radius: 12px; cursor: pointer; font-family: inherit; }
   .subnote { text-align: center; color: var(--muted); font-size: 12px; margin-top: 10px; }
+
+  /* intro enrichment */
+  .gaugewrap { margin: 28px auto 0; width: 168px; text-align: center; }
+  .gauge { width: 168px; height: 168px; border-radius: 50%; position: relative;
+    background: conic-gradient(var(--red) 0 25%, var(--amber) 25% 60%, var(--green) 60% 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 26px rgba(0,0,0,.10); }
+  .gauge::before { content: ""; position: absolute; inset: 14px; border-radius: 50%; background: #fff; }
+  .gauge b { position: relative; font-size: 46px; font-weight: 800; font-family: "Playfair Display", "Noto Serif SC", serif; }
+  .gauge span { position: relative; }
+  .gaugewrap p { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+  .secT { margin-top: 34px; font-size: 12px; font-weight: 800; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--gold); text-align: center; }
+  .agrid { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .acard { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 15px 14px; }
+  .acard .ic { font-size: 21px; }
+  .acard b { display: block; font-size: 14.5px; margin-top: 7px; }
+  .acard p { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+  .gets { margin-top: 14px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .gets div { display: flex; gap: 10px; font-size: 14px; padding: 7px 0; align-items: baseline; }
+  .gets div + div { border-top: 1px dashed var(--line); }
+  .gets .tick { color: var(--green); font-weight: 800; flex: none; }
+  .gets .lock { color: var(--muted); }
+  .whofor { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 
   /* questions */
   .qarea { margin-top: 30px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--gold); text-transform: uppercase; }
@@ -83,7 +108,10 @@
 <body>
 <div class="wrap">
   <div class="top">
-    <div class="brand"><span class="sq">SML</span><span>Bookkeeping &amp; Tax<small data-i18n="tagline">BUSINESS MONEY HEALTH CHECK</small></span></div>
+    <div class="brand">
+      <img src="sml-logo.jpg" alt="SML Bookkeeping &amp; Tax">
+      <small data-i18n="tagline">BUSINESS MONEY HEALTH CHECK</small>
+    </div>
     <button class="lang" onclick="toggleLang()" id="langBtn">中文</button>
   </div>
   <div class="bar"><i id="prog"></i></div>
@@ -97,8 +125,38 @@
       <span class="chip" data-i18n="c2">📱 No login needed</span>
       <span class="chip" data-i18n="c3">📊 Instant score</span>
     </div>
+    <div class="gaugewrap">
+      <div class="gauge"><b>?</b></div>
+      <p data-i18n="gaugeCap">Where will your business land?</p>
+    </div>
     <button class="cta" onclick="startQuiz()" data-i18n="start">Start the check →</button>
     <div class="subnote" data-i18n="startsub">Built by SML Bookkeeping &amp; Tax — registered agents</div>
+
+    <div class="secT" data-i18n="areasT">The 4 areas we score</div>
+    <div class="agrid">
+      <div class="acard"><span class="ic">💵</span><b data-i18n="a1">Cash Flow</b><p data-i18n="a1p">Who owes you money, how fast invoices go out, who chases them.</p></div>
+      <div class="acard"><span class="ic">📚</span><b data-i18n="a2">Books &amp; Records</b><p data-i18n="a2p">How current your books are, where receipts live, business vs personal.</p></div>
+      <div class="acard"><span class="ic">🧾</span><b data-i18n="a3">Tax &amp; Compliance</b><p data-i18n="a3p">BAS without the panic, and whether anyone plans your tax before June 30.</p></div>
+      <div class="acard"><span class="ic">📈</span><b data-i18n="a4">Insight &amp; Support</b><p data-i18n="a4p">Do you know what actually makes money — and is anyone telling you?</p></div>
+    </div>
+
+    <div class="secT" data-i18n="getsT">What you'll get</div>
+    <div class="gets">
+      <div><span class="tick">✓</span><span data-i18n="g1">Your overall score out of 100 — instantly</span></div>
+      <div><span class="tick">✓</span><span data-i18n="g2">A breakdown of all 4 areas, strongest to weakest</span></div>
+      <div><span class="tick">✓</span><span data-i18n="g3">Your single weakest area, named — with the honest version of why it matters</span></div>
+      <div><span class="tick">🔒</span><span class="lock" data-i18n="g4">Your fix-first plan — we walk through it together on a free 15-minute call</span></div>
+    </div>
+
+    <div class="secT" data-i18n="whoT">Built for owners like you</div>
+    <div class="whofor">
+      <span class="chip" data-i18n="w1">Tradies &amp; construction</span>
+      <span class="chip" data-i18n="w2">Cafés &amp; restaurants</span>
+      <span class="chip" data-i18n="w3">Retail &amp; e-commerce</span>
+      <span class="chip" data-i18n="w4">Clinics &amp; services</span>
+      <span class="chip" data-i18n="w5">Real estate &amp; trades</span>
+    </div>
+    <button class="cta" onclick="startQuiz()" data-i18n="start2">Check my business now →</button>
   </div>
 
   <!-- QUESTION -->
@@ -172,6 +230,21 @@ const I18N = {
   copied:"Link copied!",
   emailNeed:"Please enter your email so we can send your report.",
   qcount:"Question {n} of 10",
+  gaugeCap:"Where will your business land?",
+  areasT:"The 4 areas we score",
+  a1:"Cash Flow", a1p:"Who owes you money, how fast invoices go out, who chases them.",
+  a2:"Books & Records", a2p:"How current your books are, where receipts live, business vs personal.",
+  a3:"Tax & Compliance", a3p:"BAS without the panic, and whether anyone plans your tax before June 30.",
+  a4:"Insight & Support", a4p:"Do you know what actually makes money — and is anyone telling you?",
+  getsT:"What you'll get",
+  g1:"Your overall score out of 100 — instantly",
+  g2:"A breakdown of all 4 areas, strongest to weakest",
+  g3:"Your single weakest area, named — with the honest version of why it matters",
+  g4:"Your fix-first plan — we walk through it together on a free 15-minute call",
+  whoT:"Built for owners like you",
+  w1:"Tradies & construction", w2:"Cafés & restaurants", w3:"Retail & e-commerce",
+  w4:"Clinics & services", w5:"Real estate & trades",
+  start2:"Check my business now →",
  },
  zh: {
   tagline:"企业财务健康自测",
@@ -194,6 +267,21 @@ const I18N = {
   copied:"链接已复制！",
   emailNeed:"请填写邮箱，报告将发送给你。",
   qcount:"第 {n} 题 / 共 10 题",
+  gaugeCap:"你的生意会落在哪一段？",
+  areasT:"我们评估的四大领域",
+  a1:"现金流", a1p:"谁欠你钱、发票多快开出去、逾期有没有人追。",
+  a2:"账务基础", a2p:"账更新到哪了、收据放在哪、公私有没有分开。",
+  a3:"税务合规", a3p:"BAS 报得从容吗？有没有人在 6 月 30 日前帮你规划省税？",
+  a4:"经营洞察", a4p:"你知道什么真正赚钱吗——有人主动告诉你吗？",
+  getsT:"你会得到什么",
+  g1:"百分制总分——即时出分",
+  g2:"四大领域逐项分解，从强到弱",
+  g3:"点名你最薄弱的一环——附上一句不绕弯的实话",
+  g4:"修复优先级方案——在免费 15 分钟通话里一起过",
+  whoT:"为这些老板而做",
+  w1:"建筑与技工", w2:"餐饮咖啡", w3:"零售与电商",
+  w4:"诊所与服务业", w5:"地产与中介",
+  start2:"立即测测我的生意 →",
  }
 };
 
