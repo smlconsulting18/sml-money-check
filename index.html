@@ -6,103 +6,135 @@
 <title>Business Money Health Check — SML Bookkeeping & Tax</title>
 <meta name="description" content="10 quick questions. 3 minutes. See where your business might be leaking money.">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Noto+Serif+SC:wght@500;700;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Noto+Serif+SC:wght@600;900&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --paper:#ecebe9; --ink:#121212; --muted:#6e6c68; --line:#d8d6d0; --gold:#c9a53a; --red:#b3352e; --green:#2c6e49; --amber:#b07d1e; }
-  body { font-family: -apple-system, "PingFang SC", "Segoe UI", sans-serif; background: var(--paper);
-    color: var(--ink); min-height: 100vh; }
+  :root {
+    --paper:#edebe6; --card:#ffffff; --ink:#141414; --muted:#75716a; --line:#dcd9d1;
+    --gold:#b99549; --gold-soft:#d8c290; --green:#2e6b4f; --amber:#b07f2a; --red:#a9382f;
+  }
+  body { font-family: -apple-system, "PingFang SC", "Segoe UI", sans-serif; color: var(--ink);
+    background: radial-gradient(1200px 500px at 50% -100px, #f7f5f0 0%, var(--paper) 60%);
+    min-height: 100vh; -webkit-font-smoothing: antialiased; }
   .serif { font-family: "Playfair Display", "Noto Serif SC", Georgia, serif; }
-  .wrap { max-width: 560px; margin: 0 auto; padding: 22px 20px 60px; }
-  .top { position: relative; text-align: center; padding-top: 6px; }
-  .brand img { height: 84px; width: 84px; object-fit: cover; border-radius: 14px;
-    box-shadow: 0 4px 14px rgba(0,0,0,.08); }
-  .brand small { display: block; font-weight: 600; font-size: 10px; color: var(--muted);
-    letter-spacing: .22em; margin-top: 8px; }
-  .lang { position: absolute; right: 0; top: 6px; border: 1px solid var(--ink); background: transparent;
-    padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; cursor: pointer; }
-  .bar { height: 4px; background: var(--line); border-radius: 2px; margin-top: 18px; overflow: hidden; }
-  .bar i { display: block; height: 100%; width: 0%; background: var(--ink); transition: width .3s; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 30px 22px 70px; }
+
+  /* header */
+  .top { position: relative; text-align: center; }
+  .brand img { height: 76px; width: 76px; object-fit: cover; border-radius: 50%;
+    border: 1px solid var(--line); box-shadow: 0 6px 22px rgba(20,20,20,.08); background:#fff; }
+  .brand small { display: block; font-weight: 600; font-size: 10.5px; color: var(--muted);
+    letter-spacing: .3em; margin-top: 12px; }
+  .lang { position: absolute; right: 0; top: 4px; border: 1px solid var(--line); background: #fff;
+    padding: 7px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 700; cursor: pointer;
+    color: var(--ink); transition: border-color .2s; }
+  .lang:hover { border-color: var(--ink); }
+  .goldrule { width: 44px; height: 2px; background: var(--gold); margin: 18px auto 0; }
+  .bar { height: 3px; background: var(--line); border-radius: 2px; margin-top: 20px; overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0%; background: var(--gold); transition: width .35s; }
+
   .screen { display: none; }
-  .screen.on { display: block; animation: fade .3s ease; }
-  @keyframes fade { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: none; } }
+  .screen.on { display: block; animation: fade .35s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: none; } }
 
   /* intro */
-  h1 { font-size: 32px; line-height: 1.2; margin-top: 26px; font-weight: 800; text-align: center; }
-  .promise { margin-top: 12px; font-size: 16px; color: #333; line-height: 1.6; text-align: center; }
-  .meta { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-  .chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 13px; font-size: 12.5px; color: #444; }
-  .cta { display: block; width: 100%; margin-top: 24px; background: var(--ink); color: #fff; border: none;
-    padding: 17px; font-size: 17px; font-weight: 800; border-radius: 12px; cursor: pointer; font-family: inherit; }
-  .subnote { text-align: center; color: var(--muted); font-size: 12px; margin-top: 10px; }
+  h1 { font-size: 37px; line-height: 1.22; margin-top: 30px; font-weight: 800; text-align: center;
+    letter-spacing: -.01em; }
+  .promise { margin-top: 14px; font-size: 16px; color: #45423c; line-height: 1.7; text-align: center;
+    max-width: 460px; margin-left: auto; margin-right: auto; }
+  .metaline { margin-top: 18px; text-align: center; font-size: 13px; color: var(--muted);
+    letter-spacing: .08em; }
+  .metaline b { color: var(--ink); font-weight: 700; }
+  .metaline span { margin: 0 10px; color: var(--gold); }
 
-  /* intro enrichment */
-  .gaugewrap { margin: 28px auto 0; width: 168px; text-align: center; }
-  .gauge { width: 168px; height: 168px; border-radius: 50%; position: relative;
-    background: conic-gradient(var(--red) 0 25%, var(--amber) 25% 60%, var(--green) 60% 100%);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 8px 26px rgba(0,0,0,.10); }
-  .gauge::before { content: ""; position: absolute; inset: 14px; border-radius: 50%; background: #fff; }
-  .gauge b { position: relative; font-size: 46px; font-weight: 800; font-family: "Playfair Display", "Noto Serif SC", serif; }
-  .gauge span { position: relative; }
-  .gaugewrap p { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
-  .secT { margin-top: 34px; font-size: 12px; font-weight: 800; letter-spacing: .18em;
+  /* gauge (SVG) */
+  .gaugewrap { margin: 34px auto 0; width: 290px; text-align: center; }
+  .gaugewrap p { font-size: 13px; color: var(--muted); margin-top: 4px; letter-spacing: .05em; }
+  .gnum { font-size: 15px; fill: var(--muted); font-family: -apple-system, sans-serif; }
+
+  .cta { display: block; width: 100%; margin-top: 30px; background: var(--ink); color: #fff; border: none;
+    padding: 18px; font-size: 16px; font-weight: 800; border-radius: 14px; cursor: pointer;
+    font-family: inherit; letter-spacing: .04em; transition: transform .12s, box-shadow .2s;
+    box-shadow: 0 10px 26px rgba(20,20,20,.18); text-align: center; text-decoration: none; }
+  .cta:hover { transform: translateY(-1px); }
+  .cta:active { transform: scale(.99); }
+  .cta.ghost { background: #fff; color: var(--ink); border: 1.5px solid var(--ink);
+    box-shadow: none; }
+  .subnote { text-align: center; color: var(--muted); font-size: 12px; margin-top: 12px; }
+
+  .secT { margin-top: 46px; font-size: 12px; font-weight: 800; letter-spacing: .26em;
     text-transform: uppercase; color: var(--gold); text-align: center; }
-  .agrid { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .acard { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 15px 14px; }
-  .acard .ic { font-size: 21px; }
-  .acard b { display: block; font-size: 14.5px; margin-top: 7px; }
-  .acard p { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
-  .gets { margin-top: 14px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-  .gets div { display: flex; gap: 10px; font-size: 14px; padding: 7px 0; align-items: baseline; }
-  .gets div + div { border-top: 1px dashed var(--line); }
-  .gets .tick { color: var(--green); font-weight: 800; flex: none; }
+  .secT::after { content: ""; display: block; width: 26px; height: 1px; background: var(--gold-soft);
+    margin: 10px auto 0; }
+
+  .agrid { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px){ .agrid { grid-template-columns: 1fr; } }
+  .acard { background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 20px 18px; box-shadow: 0 3px 14px rgba(20,20,20,.04); }
+  .acard svg { width: 26px; height: 26px; stroke: var(--gold); }
+  .acard b { display: block; font-size: 15.5px; margin-top: 10px; font-family: "Playfair Display","Noto Serif SC",serif; font-weight: 700; }
+  .acard p { font-size: 12.5px; color: var(--muted); margin-top: 6px; line-height: 1.6; }
+
+  .gets { margin-top: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 8px 20px; box-shadow: 0 3px 14px rgba(20,20,20,.04); }
+  .gets div { display: flex; gap: 12px; font-size: 14px; padding: 13px 0; align-items: baseline; line-height: 1.55; }
+  .gets div + div { border-top: 1px solid #f0eee8; }
+  .gets .tick { color: var(--gold); font-weight: 800; flex: none; }
   .gets .lock { color: var(--muted); }
-  .whofor { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+
+  .whofor { margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 7px 15px;
+    font-size: 12.5px; color: #55524b; }
 
   /* questions */
-  .qarea { margin-top: 30px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--gold); text-transform: uppercase; }
-  h2.q { font-size: 23px; line-height: 1.3; margin-top: 8px; font-weight: 800; }
-  .opts { margin-top: 20px; display: grid; gap: 10px; }
-  .opt { background: #fff; border: 1.5px solid var(--line); border-radius: 12px; padding: 15px 16px;
-    font-size: 15.5px; cursor: pointer; line-height: 1.4; }
-  .opt:active { transform: scale(.99); }
-  .opt.sel { border-color: var(--ink); background: #171717; color: #fff; }
-  .navrow { margin-top: 22px; display: flex; justify-content: space-between; align-items: center; }
-  .back { background: none; border: none; color: var(--muted); font-size: 13.5px; cursor: pointer; font-family: inherit; }
-  .qcount { color: var(--muted); font-size: 13px; }
+  .qarea { margin-top: 34px; font-size: 11.5px; font-weight: 800; letter-spacing: .24em;
+    color: var(--gold); text-transform: uppercase; }
+  h2.q { font-size: 25px; line-height: 1.35; margin-top: 10px; font-weight: 700; }
+  .opts { margin-top: 22px; display: grid; gap: 11px; }
+  .opt { background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; padding: 16px 16px 16px 48px;
+    font-size: 15px; cursor: pointer; line-height: 1.5; position: relative; transition: border-color .15s, box-shadow .15s; }
+  .opt::before { content: ""; position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--line); background: #fff; transition: all .15s; }
+  .opt:hover { border-color: #b9b4a8; box-shadow: 0 4px 14px rgba(20,20,20,.06); }
+  .opt.sel { border-color: var(--ink); }
+  .opt.sel::before { border-color: var(--ink); background: var(--ink); box-shadow: inset 0 0 0 3.5px #fff; }
+  .navrow { margin-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .back { background: none; border: none; color: var(--muted); font-size: 14px; cursor: pointer; font-family: inherit; }
+  .qcount { color: var(--muted); font-size: 12.5px; letter-spacing: .08em; }
 
   /* gate */
-  .gate h2 { font-size: 25px; margin-top: 30px; font-weight: 800; }
-  .gate p { color: #444; margin-top: 8px; font-size: 14.5px; line-height: 1.55; }
-  .field { margin-top: 14px; }
-  .field label { font-size: 12.5px; font-weight: 700; color: #444; display: block; margin-bottom: 5px; }
-  .field input { width: 100%; padding: 14px; font-size: 16px; border: 1.5px solid var(--line); border-radius: 10px;
-    background: #fff; font-family: inherit; }
-  .field input:focus { outline: none; border-color: var(--ink); }
-  .priv { font-size: 11.5px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
+  .gatecard { margin-top: 30px; background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 26px 22px; box-shadow: 0 8px 30px rgba(20,20,20,.07); }
+  .gate h2 { font-size: 26px; font-weight: 800; text-align: center; }
+  .gate p { color: #55524b; margin-top: 10px; font-size: 14px; line-height: 1.6; text-align: center; }
+  .field { margin-top: 15px; }
+  .field label { font-size: 12px; font-weight: 700; color: #55524b; display: block; margin-bottom: 6px;
+    letter-spacing: .06em; }
+  .field input { width: 100%; padding: 14px; font-size: 16px; border: 1.5px solid var(--line); border-radius: 12px;
+    background: #fcfbf9; font-family: inherit; }
+  .field input:focus { outline: none; border-color: var(--gold); background: #fff; }
+  .priv { font-size: 11px; color: var(--muted); margin-top: 14px; line-height: 1.6; text-align: center; }
 
   /* report */
-  .rp { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 26px 22px; margin-top: 26px; }
-  .rp .score { text-align: center; }
-  .rp .big { font-size: 64px; font-weight: 800; line-height: 1; }
-  .rp .grade { font-size: 15px; font-weight: 800; margin-top: 4px; }
-  .rp .of { color: var(--muted); font-size: 12px; }
-  .areas { margin-top: 22px; display: grid; gap: 12px; }
-  .arow { display: grid; grid-template-columns: 118px 1fr 38px; gap: 10px; align-items: center; font-size: 13px; }
-  .atrack { height: 9px; background: var(--paper); border-radius: 5px; overflow: hidden; }
-  .atrack i { display: block; height: 100%; border-radius: 5px; }
-  .aval { font-weight: 800; text-align: right; }
-  .weakbox { margin-top: 22px; background: #fdf1f0; border: 1px solid #e5c2bf; border-radius: 12px; padding: 15px 16px; }
-  .weakbox b { display: block; font-size: 14.5px; }
-  .weakbox p { font-size: 13.5px; margin-top: 6px; line-height: 1.55; color: #4a2b28; }
-  .hookline { margin-top: 16px; font-size: 13.5px; line-height: 1.6; color: #333; }
-  .bookbtn { display: block; text-align: center; margin-top: 22px; background: var(--ink); color: #fff;
-    text-decoration: none; padding: 17px; font-size: 16.5px; font-weight: 800; border-radius: 12px; }
-  .booksub { text-align: center; font-size: 12px; color: var(--muted); margin-top: 8px; }
-  .share { margin-top: 20px; text-align: center; font-size: 13px; color: var(--muted); }
-  .share button { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 8px 16px;
-    font-size: 12.5px; cursor: pointer; font-family: inherit; margin-top: 8px; }
-  .fine { margin-top: 26px; font-size: 10.5px; color: var(--muted); line-height: 1.55; }
+  .rp { background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+    padding: 30px 24px; margin-top: 28px; box-shadow: 0 10px 36px rgba(20,20,20,.08); }
+  .rgauge { text-align: center; }
+  .rgauge .grade { font-size: 14px; font-weight: 800; margin-top: 2px; letter-spacing: .12em; text-transform: uppercase; }
+  .areas { margin-top: 26px; display: grid; gap: 14px; }
+  .arow { display: grid; grid-template-columns: 128px 1fr 42px; gap: 12px; align-items: center; font-size: 13.5px; }
+  .atrack { height: 8px; background: #f0eee8; border-radius: 5px; overflow: hidden; }
+  .atrack i { display: block; height: 100%; border-radius: 5px; transition: width .8s ease; }
+  .aval { font-weight: 800; text-align: right; font-family: "Playfair Display", serif; font-size: 16px; }
+  .weakbox { margin-top: 26px; background: #faf6ef; border: 1px solid var(--gold-soft); border-radius: 14px;
+    padding: 18px; border-left: 4px solid var(--gold); }
+  .weakbox b { display: block; font-size: 15px; font-family: "Playfair Display","Noto Serif SC",serif; }
+  .weakbox p { font-size: 13.5px; margin-top: 8px; line-height: 1.65; color: #4d4a43; }
+  .hookline { margin-top: 18px; font-size: 13.5px; line-height: 1.7; color: #45423c; }
+  .ctastack { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; }
+  .booksub { text-align: center; font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .share { margin-top: 24px; text-align: center; font-size: 13px; color: var(--muted); }
+  .share button { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 9px 18px;
+    font-size: 12.5px; cursor: pointer; font-family: inherit; margin-top: 10px; }
+  .fine { margin-top: 28px; font-size: 10.5px; color: var(--muted); line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -113,6 +145,7 @@
       <small data-i18n="tagline">BUSINESS MONEY HEALTH CHECK</small>
     </div>
     <button class="lang" onclick="toggleLang()" id="langBtn">中文</button>
+    <div class="goldrule"></div>
   </div>
   <div class="bar"><i id="prog"></i></div>
 
@@ -120,32 +153,59 @@
   <div class="screen on" id="intro">
     <h1 class="serif" data-i18n="h1">How healthy is your business's money, really?</h1>
     <p class="promise" data-i18n="promise">10 quick questions, 3 minutes. Get a score out of 100 — and see exactly which of the 4 areas is quietly leaking money.</p>
-    <div class="meta">
-      <span class="chip" data-i18n="c1">⏱ 3 minutes</span>
-      <span class="chip" data-i18n="c2">📱 No login needed</span>
-      <span class="chip" data-i18n="c3">📊 Instant score</span>
-    </div>
+    <div class="metaline"><b data-i18n="m1">10 questions</b><span>·</span><b data-i18n="m2">3 minutes</b><span>·</span><b data-i18n="m3">instant score</b></div>
+
     <div class="gaugewrap">
-      <div class="gauge"><b>?</b></div>
+      <svg viewBox="0 0 290 170" width="290" height="170">
+        <path d="M 25 150 A 120 120 0 0 1 265 150" fill="none" stroke="#e8e5dd" stroke-width="16" stroke-linecap="round"/>
+        <path d="M 25 150 A 120 120 0 0 1 78 51" fill="none" stroke="#a9382f" stroke-width="16" stroke-linecap="round" opacity=".85"/>
+        <path d="M 92 41 A 120 120 0 0 1 198 41" fill="none" stroke="#b07f2a" stroke-width="16" opacity=".85"/>
+        <path d="M 212 51 A 120 120 0 0 1 265 150" fill="none" stroke="#2e6b4f" stroke-width="16" stroke-linecap="round" opacity=".85"/>
+        <g stroke="#c9c5ba" stroke-width="1.5">
+          <line x1="145" y1="38" x2="145" y2="48"/>
+          <line x1="63" y1="72" x2="70" y2="79"/>
+          <line x1="227" y1="72" x2="220" y2="79"/>
+        </g>
+        <text x="25" y="168" class="gnum" text-anchor="middle">0</text>
+        <text x="265" y="168" class="gnum" text-anchor="middle">100</text>
+        <g transform="rotate(18 145 150)">
+          <line x1="145" y1="150" x2="145" y2="58" stroke="#141414" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="145" cy="150" r="7" fill="#141414"/>
+          <circle cx="145" cy="150" r="2.6" fill="#b99549"/>
+        </g>
+      </svg>
       <p data-i18n="gaugeCap">Where will your business land?</p>
     </div>
+
     <button class="cta" onclick="startQuiz()" data-i18n="start">Start the check →</button>
     <div class="subnote" data-i18n="startsub">Built by SML Bookkeeping &amp; Tax — registered agents</div>
 
     <div class="secT" data-i18n="areasT">The 4 areas we score</div>
     <div class="agrid">
-      <div class="acard"><span class="ic">💵</span><b data-i18n="a1">Cash Flow</b><p data-i18n="a1p">Who owes you money, how fast invoices go out, who chases them.</p></div>
-      <div class="acard"><span class="ic">📚</span><b data-i18n="a2">Books &amp; Records</b><p data-i18n="a2p">How current your books are, where receipts live, business vs personal.</p></div>
-      <div class="acard"><span class="ic">🧾</span><b data-i18n="a3">Tax &amp; Compliance</b><p data-i18n="a3p">BAS without the panic, and whether anyone plans your tax before June 30.</p></div>
-      <div class="acard"><span class="ic">📈</span><b data-i18n="a4">Insight &amp; Support</b><p data-i18n="a4p">Do you know what actually makes money — and is anyone telling you?</p></div>
+      <div class="acard">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="M14.8 9.2c-.5-1-1.5-1.5-2.8-1.5-1.6 0-2.9.8-2.9 2.1 0 2.8 6 1.5 6 4.3 0 1.3-1.3 2.2-3.1 2.2-1.5 0-2.6-.6-3.1-1.7M12 6v1.7M12 16.3V18"/></svg>
+        <b data-i18n="a1">Cash Flow</b><p data-i18n="a1p">Who owes you money, how fast invoices go out, who chases them.</p>
+      </div>
+      <div class="acard">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15.5H6.5A2.5 2.5 0 0 0 4 21z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20M8 7.5h8M8 11h5"/></svg>
+        <b data-i18n="a2">Books &amp; Records</b><p data-i18n="a2p">How current your books are, where receipts live, business vs personal.</p>
+      </div>
+      <div class="acard">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2-1.4L14 21l-2-1.4L10 21l-2-1.4L6 21z"/><path d="M9 8.5l6 6M9.6 9.1a.6.6 0 1 0 0-1.2.6.6 0 0 0 0 1.2zM14.4 14a.6.6 0 1 0 0-1.2.6.6 0 0 0 0 1.2z"/></svg>
+        <b data-i18n="a3">Tax &amp; Compliance</b><p data-i18n="a3p">BAS without the panic, and whether anyone plans your tax before June 30.</p>
+      </div>
+      <div class="acard">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5h17M5.5 20.5V13M10 20.5V8.5M14.5 20.5V11M19 20.5V5.5M5.5 9.5l4.5-4 4.5 2.5 4.5-4.5"/></svg>
+        <b data-i18n="a4">Insight &amp; Support</b><p data-i18n="a4p">Do you know what actually makes money — and is anyone telling you?</p>
+      </div>
     </div>
 
     <div class="secT" data-i18n="getsT">What you'll get</div>
     <div class="gets">
-      <div><span class="tick">✓</span><span data-i18n="g1">Your overall score out of 100 — instantly</span></div>
-      <div><span class="tick">✓</span><span data-i18n="g2">A breakdown of all 4 areas, strongest to weakest</span></div>
-      <div><span class="tick">✓</span><span data-i18n="g3">Your single weakest area, named — with the honest version of why it matters</span></div>
-      <div><span class="tick">🔒</span><span class="lock" data-i18n="g4">Your fix-first plan — we walk through it together on a free 15-minute call</span></div>
+      <div><span class="tick">✦</span><span data-i18n="g1">Your money health score out of 100 — the moment you finish</span></div>
+      <div><span class="tick">✦</span><span data-i18n="g2">All 4 areas scored — cash flow, books, tax and insight, strongest to weakest</span></div>
+      <div><span class="tick">✦</span><span data-i18n="g3">Your weakest area pinpointed — and what it's quietly costing you</span></div>
+      <div><span class="tick">🔒</span><span class="lock" data-i18n="g4">Your personalised fix-first plan — unlocked in a free 15-minute call with a registered accountant</span></div>
     </div>
 
     <div class="secT" data-i18n="whoT">Built for owners like you</div>
@@ -156,7 +216,7 @@
       <span class="chip" data-i18n="w4">Clinics &amp; services</span>
       <span class="chip" data-i18n="w5">Real estate &amp; trades</span>
     </div>
-    <button class="cta" onclick="startQuiz()" data-i18n="start2">Check my business now →</button>
+    <button class="cta" onclick="startQuiz()" data-i18n="start2" style="margin-top:26px">Check my business now →</button>
   </div>
 
   <!-- QUESTION -->
@@ -172,29 +232,36 @@
 
   <!-- GATE -->
   <div class="screen gate" id="gate">
-    <h2 class="serif" data-i18n="gateH">Your score is ready.</h2>
-    <p data-i18n="gateP">Tell us where to send your result — and unlock your full breakdown on the next screen.</p>
-    <div class="field"><label data-i18n="fName">Your name</label><input id="fName" type="text" autocomplete="name"></div>
-    <div class="field"><label data-i18n="fEmail">Email</label><input id="fEmail" type="email" autocomplete="email" required></div>
-    <div class="field"><label data-i18n="fPhone">Mobile</label><input id="fPhone" type="tel" autocomplete="tel"></div>
-    <div class="field"><label data-i18n="fBiz">Business type (optional)</label><input id="fBiz" type="text" placeholder=""></div>
-    <button class="cta" onclick="showReport()" data-i18n="gateBtn">Show my score →</button>
-    <p class="priv" data-i18n="priv">We'll email you your report. No spam, no sharing your details — ever. SML Bookkeeping &amp; Tax.</p>
+    <div class="gatecard">
+      <h2 class="serif" data-i18n="gateH">Your score is ready.</h2>
+      <p data-i18n="gateP">Tell us where to send your report — and unlock your full breakdown on the next screen.</p>
+      <div class="field"><label data-i18n="fName">Your name</label><input id="fName" type="text" autocomplete="name"></div>
+      <div class="field"><label data-i18n="fEmail">Email</label><input id="fEmail" type="email" autocomplete="email" required></div>
+      <div class="field"><label data-i18n="fPhone">Mobile</label><input id="fPhone" type="tel" autocomplete="tel"></div>
+      <div class="field"><label data-i18n="fBiz">Business type (optional)</label><input id="fBiz" type="text"></div>
+      <button class="cta" onclick="showReport()" data-i18n="gateBtn">Show my score →</button>
+      <p class="priv" data-i18n="priv">We'll email you your report. No spam, no sharing your details — ever. SML Bookkeeping &amp; Tax.</p>
+    </div>
   </div>
 
   <!-- REPORT -->
   <div class="screen" id="report">
     <div class="rp">
-      <div class="score">
-        <div class="big serif" id="rScore">—</div>
-        <div class="of" data-i18n="of">out of 100</div>
+      <div class="rgauge">
+        <svg viewBox="0 0 290 170" width="270" height="158">
+          <path d="M 25 150 A 120 120 0 0 1 265 150" fill="none" stroke="#f0eee8" stroke-width="17" stroke-linecap="round"/>
+          <path id="scoreArc" d="M 25 150 A 120 120 0 0 1 265 150" fill="none" stroke="#2e6b4f" stroke-width="17"
+            stroke-linecap="round" stroke-dasharray="377" stroke-dashoffset="377" style="transition: stroke-dashoffset 1.1s ease"/>
+          <text id="rScore" x="145" y="128" text-anchor="middle" style="font-family:'Playfair Display',serif; font-weight:800; font-size:62px;">0</text>
+          <text x="145" y="150" text-anchor="middle" class="gnum" data-i18n="of" id="ofLabel">out of 100</text>
+        </svg>
         <div class="grade" id="rGrade"></div>
       </div>
       <div class="areas" id="rAreas"></div>
       <div class="weakbox"><b id="rWeakT"></b><p id="rWeakP"></p></div>
       <p class="hookline" id="rHook"></p>
-      <a class="bookbtn" id="bookBtn" href="tel:+61433408886" data-i18n="book">📞 Call now — free 15-minute chat</a>
-      <div class="booksub" data-i18n="booksub">We'll walk through your result and what to fix first. No obligation, no sales pitch marathon.</div>
+      <div class="ctastack" id="ctaStack"></div>
+      <div class="booksub" id="bookSub"></div>
     </div>
     <div class="share">
       <span data-i18n="shareT">Know another business owner who should see their score?</span><br>
@@ -206,6 +273,9 @@
 
 <script>
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/smlconsulting18@gmail.com";
+const PHONE_DISPLAY = "0433 408 886";
+const PHONE_TEL = "tel:+61433408886";
+const CALENDLY = "https://calendly.com/smlconsulting18/60min";
 let lang = localStorage.getItem("sml_lang") || "en";
 
 const I18N = {
@@ -213,15 +283,17 @@ const I18N = {
   tagline:"BUSINESS MONEY HEALTH CHECK",
   h1:"How healthy is your business's money, really?",
   promise:"10 quick questions, 3 minutes. Get a score out of 100 — and see exactly which of the 4 areas is quietly leaking money.",
-  c1:"⏱ 3 minutes", c2:"📱 No login needed", c3:"📊 Instant score",
+  m1:"10 questions", m2:"3 minutes", m3:"instant score",
   start:"Start the check →", startsub:"Built by SML Bookkeeping & Tax — registered agents",
   gateH:"Your score is ready.", gateP:"Tell us where to send your report — and unlock your full breakdown on the next screen.",
   fName:"Your name", fEmail:"Email", fPhone:"Mobile", fBiz:"Business type (optional)",
   gateBtn:"Show my score →",
   priv:"We'll email you your report. No spam, no sharing your details — ever. SML Bookkeeping & Tax.",
   of:"out of 100",
-  book:"📞 Call now — free 15-minute chat",
-  booksub:"One tap to call 0433 408 886. We'll walk through your result and what to fix first. No obligation.",
+  callBtn:"📞 Call now — free 15-minute chat",
+  bookBtn:"Book your free 15-minute call →",
+  orCall:"…or call us directly: 0433 408 886",
+  orBook:"…prefer to book a time online? Tap the second button.",
   shareT:"Know another business owner who should see their score?",
   shareBtn:"Copy the link to share",
   fine:"This check is general information, not financial or tax advice. Scores are indicative, based on your answers. Figures described are typical ranges observed in small businesses generally, not a prediction for your business. SML Bookkeeping & Tax.",
@@ -250,15 +322,17 @@ const I18N = {
   tagline:"企业财务健康自测",
   h1:"你的生意，财务健康到底几分？",
   promise:"10 道选择题，3 分钟。拿到一个百分制评分——看看四大领域里，哪一块正在悄悄漏钱。",
-  c1:"⏱ 3 分钟", c2:"📱 无需注册", c3:"📊 即时出分",
+  m1:"10 道题", m2:"3 分钟", m3:"即时出分",
   start:"开始测评 →", startsub:"由 SML Bookkeeping & Tax（注册代理）出品",
   gateH:"你的分数已生成。", gateP:"留下联系方式接收报告——下一屏立即解锁完整评分。",
   fName:"称呼", fEmail:"邮箱", fPhone:"手机", fBiz:"行业（选填）",
   gateBtn:"查看我的分数 →",
   priv:"报告会发送到你的邮箱。不骚扰、绝不外传你的信息。SML Bookkeeping & Tax。",
   of:"满分 100",
-  book:"📞 一键拨打——免费聊 15 分钟",
-  booksub:"点击直接拨打 0433 408 886。我们带你过一遍结果、该先修哪里。无任何义务。",
+  callBtn:"📞 一键拨打——免费聊 15 分钟",
+  bookBtn:"在线预约免费 15 分钟通话 →",
+  orCall:"……或直接致电：0433 408 886",
+  orBook:"……想在线约时间？点下面第二个按钮。",
   shareT:"认识其他也该测一测的老板？",
   shareBtn:"复制链接分享",
   fine:"本测评为一般性信息，不构成财务或税务建议。分数基于你的作答，仅供参考。文中金额为小企业中常见的普遍区间，并非对你企业的预测。SML Bookkeeping & Tax。",
@@ -397,7 +471,7 @@ function renderQ(){
     d.className = "opt" + (answers[qi]===j ? " sel":"");
     d.textContent = o[lang];
     d.onclick = ()=>{ answers[qi]=j; d.classList.add("sel");
-      setTimeout(()=>{ qi<QUESTIONS.length-1 ? (qi++, renderQ()) : show("gate"); }, 180); };
+      setTimeout(()=>{ qi<QUESTIONS.length-1 ? (qi++, renderQ()) : show("gate"); }, 200); };
     box.appendChild(d);
   });
   setProg(Math.round(qi/QUESTIONS.length*90));
@@ -420,7 +494,6 @@ function showReport(){
   const email = document.getElementById("fEmail").value.trim();
   if(!email || !email.includes("@")){ alert(t("emailNeed")); return; }
   const r = calc();
-  // send lead + answers (non-blocking)
   const payload = {
     _subject: "🎯 New Money Health Check lead — score " + r.overall,
     _template: "table",
@@ -436,15 +509,20 @@ function showReport(){
     payload["Q"+(i+1)+" "+q.en.slice(0,45)] = answers[i]!==null ? q.opts[answers[i]].en : "-";
   });
   sendLead(payload);
-  // render report
-  const g = r.overall>=80?["green","#2c6e49"]:r.overall>=60?["yellow","#b07d1e"]:r.overall>=40?["orange","#b3352e"]:["red","#b3352e"];
-  document.getElementById("rScore").textContent = r.overall;
-  document.getElementById("rScore").style.color = g[1];
+
+  const g = r.overall>=80?["green","#2e6b4f"]:r.overall>=60?["yellow","#b07f2a"]:r.overall>=40?["orange","#a9382f"]:["red","#a9382f"];
+  const scoreEl = document.getElementById("rScore");
+  scoreEl.textContent = r.overall;
+  scoreEl.style.fill = g[1];
   document.getElementById("rGrade").textContent = t("grades")[g[0]];
   document.getElementById("rGrade").style.color = g[1];
+  const arc = document.getElementById("scoreArc");
+  arc.style.stroke = g[1];
+  requestAnimationFrame(()=>{ arc.style.strokeDashoffset = 377 - (377 * r.overall / 100); });
+
   const ab = document.getElementById("rAreas"); ab.innerHTML = "";
   [...r.areas].sort((a,b)=>b[1]-a[1]).forEach(([a,v])=>{
-    const col = v>=80?"#2c6e49":v>=60?"#b07d1e":"#b3352e";
+    const col = v>=80?"#2e6b4f":v>=60?"#b07f2a":"#a9382f";
     ab.innerHTML += `<div class="arow"><span>${AREAS[a][lang]}</span>
       <div class="atrack"><i style="width:${v}%;background:${col}"></i></div>
       <span class="aval" style="color:${col}">${v}</span></div>`;
@@ -452,6 +530,16 @@ function showReport(){
   document.getElementById("rWeakT").textContent = WEAK[r.weakest[0]][lang][0];
   document.getElementById("rWeakP").textContent = WEAK[r.weakest[0]][lang][1];
   document.getElementById("rHook").textContent = t("hook");
+
+  // adaptive CTA: mobile = call first; desktop = book first
+  const isTouch = matchMedia("(pointer:coarse)").matches;
+  const stack = document.getElementById("ctaStack");
+  const callBtn = (ghost)=>`<a class="cta${ghost?" ghost":""}" href="${PHONE_TEL}">${t("callBtn")}</a>`;
+  const bookBtn = (ghost)=>`<a class="cta${ghost?" ghost":""}" href="${CALENDLY}" target="_blank" rel="noopener">${t("bookBtn")}</a>`;
+  // mobile: call first; desktop: book online first (tel: links don't dial on computers)
+  stack.innerHTML = isTouch ? callBtn(false) + bookBtn(true) : bookBtn(false) + callBtn(true);
+  document.getElementById("bookSub").textContent = isTouch ? t("orBook") : t("orCall");
+
   setProg(100);
   show("report");
 }
