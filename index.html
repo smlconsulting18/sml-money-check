@@ -20,8 +20,10 @@
 
   /* header */
   .top { position: relative; text-align: center; }
-  .brand img { height: 76px; width: 76px; object-fit: cover; border-radius: 50%;
-    border: 1px solid var(--line); box-shadow: 0 6px 22px rgba(20,20,20,.08); background:#fff; }
+  .logoc { display: inline-block; width: 116px; height: 116px; border-radius: 50%;
+    overflow: hidden; border: 1px solid var(--line); box-shadow: 0 8px 26px rgba(20,20,20,.10);
+    background: #fff; }
+  .logoc img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.32); display: block; }
   .brand small { display: block; font-weight: 600; font-size: 10.5px; color: var(--muted);
     letter-spacing: .3em; margin-top: 12px; }
   .lang { position: absolute; right: 0; top: 4px; border: 1px solid var(--line); background: #fff;
@@ -141,7 +143,9 @@
 <div class="wrap">
   <div class="top">
     <div class="brand">
-      <img src="sml-logo.jpg" alt="SML Bookkeeping &amp; Tax">
+      <a class="logoc" href="https://smlbookkeeping.com.au" target="_blank" rel="noopener" title="SML Bookkeeping &amp; Tax">
+        <img src="sml-logo.jpg" alt="SML Bookkeeping &amp; Tax">
+      </a>
       <small data-i18n="tagline">BUSINESS MONEY HEALTH CHECK</small>
     </div>
     <button class="lang" onclick="toggleLang()" id="langBtn">中文</button>
@@ -151,7 +155,7 @@
 
   <!-- INTRO -->
   <div class="screen on" id="intro">
-    <h1 class="serif" data-i18n="h1">How healthy is your business's money, really?</h1>
+    <h1 class="serif" data-i18n="h1">Is your business quietly leaking money?</h1>
     <p class="promise" data-i18n="promise">10 quick questions, 3 minutes. Get a score out of 100 — and see exactly which of the 4 areas is quietly leaking money.</p>
     <div class="metaline"><b data-i18n="m1">10 questions</b><span>·</span><b data-i18n="m2">3 minutes</b><span>·</span><b data-i18n="m3">instant score</b></div>
 
@@ -205,7 +209,7 @@
       <div><span class="tick">✦</span><span data-i18n="g1">Your money health score out of 100 — the moment you finish</span></div>
       <div><span class="tick">✦</span><span data-i18n="g2">All 4 areas scored — cash flow, books, tax and insight, strongest to weakest</span></div>
       <div><span class="tick">✦</span><span data-i18n="g3">Your weakest area pinpointed — and what it's quietly costing you</span></div>
-      <div><span class="tick">🔒</span><span class="lock" data-i18n="g4">Your personalised fix-first plan — unlocked in a free 15-minute call with a registered accountant</span></div>
+      <div><span class="tick">🔒</span><span class="lock" data-i18n="g4">Your personalised fix-first plan — unlocked in a free 15-minute call with a CPA</span></div>
     </div>
 
     <div class="secT" data-i18n="whoT">Built for owners like you</div>
@@ -281,7 +285,7 @@ let lang = localStorage.getItem("sml_lang") || "en";
 const I18N = {
  en: {
   tagline:"BUSINESS MONEY HEALTH CHECK",
-  h1:"How healthy is your business's money, really?",
+  h1:"Is your business quietly leaking money?",
   promise:"10 quick questions, 3 minutes. Get a score out of 100 — and see exactly which of the 4 areas is quietly leaking money.",
   m1:"10 questions", m2:"3 minutes", m3:"instant score",
   start:"Start the check →", startsub:"Built by SML Bookkeeping & Tax — CPA Practice &amp; Registered Tax Agent",
@@ -312,7 +316,7 @@ const I18N = {
   g1:"Your money health score out of 100 — the moment you finish",
   g2:"All 4 areas scored — cash flow, books, tax and insight, strongest to weakest",
   g3:"Your weakest area pinpointed — and what it's quietly costing you",
-  g4:"Your personalised fix-first plan — unlocked in a free 15-minute call with a registered accountant",
+  g4:"Your personalised fix-first plan — unlocked in a free 15-minute call with a CPA",
   whoT:"Built for owners like you",
   w1:"Tradies & construction", w2:"Cafés & restaurants", w3:"Retail & e-commerce",
   w4:"Clinics & services", w5:"Real estate & trades",
@@ -320,7 +324,7 @@ const I18N = {
  },
  zh: {
   tagline:"企业财务健康自测",
-  h1:"你的生意，财务健康到底几分？",
+  h1:"你的生意，正在悄悄漏钱吗？",
   promise:"10 道选择题，3 分钟。拿到一个百分制评分——看看四大领域里，哪一块正在悄悄漏钱。",
   m1:"10 道题", m2:"3 分钟", m3:"即时出分",
   start:"开始测评 →", startsub:"由 SML Bookkeeping & Tax 出品 —— CPA 会计师事务所 · 注册税务代理",
@@ -351,7 +355,7 @@ const I18N = {
   g1:"财务健康总分（满分 100）——答完立刻出分",
   g2:"现金流、账务、税务、洞察四大领域逐项评分，强弱一目了然",
   g3:"精准指出你最薄弱的一环，以及它正在悄悄让你付出的代价",
-  g4:"专属修复方案——预约免费 15 分钟通话，注册会计师告诉你先修哪里、怎么修",
+  g4:"专属修复方案——预约免费 15 分钟通话，CPA 会计师告诉你先修哪里、怎么修",
   whoT:"为这些老板而做",
   w1:"建筑与技工", w2:"餐饮咖啡", w3:"零售与电商",
   w4:"诊所与服务业", w5:"地产与中介",
