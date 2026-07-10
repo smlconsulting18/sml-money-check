@@ -347,8 +347,7 @@ function showReport(){
   QUESTIONS.forEach((q,i)=>{
     payload["Q"+(i+1)+" "+q.en.slice(0,45)] = answers[i]!==null ? q.opts[answers[i]].en : "-";
   });
-  fetch(FORM_ENDPOINT, { method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" },
-    body: JSON.stringify(payload) }).catch(()=>{});
+  sendLead(payload);
   // render report
   const g = r.overall>=80?["green","#2c6e49"]:r.overall>=60?["yellow","#b07d1e"]:r.overall>=40?["orange","#b3352e"]:["red","#b3352e"];
   document.getElementById("rScore").textContent = r.overall;
@@ -371,6 +370,40 @@ function showReport(){
 
 function copyLink(){
   navigator.clipboard.writeText(location.href.split("?")[0]).then(()=>alert(t("copied")));
+}
+
+/* Lead delivery with retry + fallback + local backup */
+function sendLead(payload){
+  try { localStorage.setItem("sml_last_lead", JSON.stringify({ t: Date.now(), payload })); } catch(e){}
+  const attempt = (n)=>{
+    fetch(FORM_ENDPOINT, { method:"POST",
+      headers:{ "Content-Type":"application/json", "Accept":"application/json" },
+      body: JSON.stringify(payload) })
+    .then(r=>{ if(!r.ok) throw new Error("bad status"); })
+    .catch(()=>{
+      if(n < 2){ setTimeout(()=>attempt(n+1), n===0 ? 2000 : 8000); }
+      else { iframeFallback(payload); }
+    });
+  };
+  attempt(0);
+}
+function iframeFallback(payload){
+  try {
+    let sink = document.getElementById("sml_sink");
+    if(!sink){
+      sink = document.createElement("iframe");
+      sink.name = "sml_sink"; sink.id = "sml_sink"; sink.style.display = "none";
+      document.body.appendChild(sink);
+    }
+    const f = document.createElement("form");
+    f.action = "https://formsubmit.co/smlconsulting18@gmail.com";
+    f.method = "POST"; f.target = "sml_sink"; f.style.display = "none";
+    const data = Object.assign({}, payload, { _captcha: "false" });
+    Object.entries(data).forEach(([k,v])=>{
+      const i = document.createElement("input"); i.name = k; i.value = v; f.appendChild(i);
+    });
+    document.body.appendChild(f); f.submit();
+  } catch(e){}
 }
 
 applyLang();
