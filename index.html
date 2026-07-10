@@ -276,7 +276,8 @@
 </div>
 
 <script>
-const FORM_ENDPOINT = "https://formsubmit.co/ajax/smlconsulting18@gmail.com";
+const FORM_ENDPOINT = "https://api.web3forms.com/submit";
+const W3F_KEY = "2f506de4-a07c-4ff4-a2c0-c5827b616ceb"; // delivers to info@smlbookkeeping.com.au
 const PHONE_DISPLAY = "0433 408 886";
 const PHONE_TEL = "tel:+61433408886";
 const CALENDLY = "https://calendly.com/smlconsulting18/60min";
@@ -499,15 +500,16 @@ function showReport(){
   if(!email || !email.includes("@")){ alert(t("emailNeed")); return; }
   const r = calc();
   const payload = {
-    _subject: "🎯 New Money Health Check lead — score " + r.overall,
-    _template: "table",
-    Name: document.getElementById("fName").value.trim(),
-    Email: email,
+    access_key: W3F_KEY,
+    subject: "🎯 New Money Health Check lead — score " + r.overall + "/100",
+    from_name: "SML Money Health Check",
+    name: document.getElementById("fName").value.trim(),
+    email: email,
     Mobile: document.getElementById("fPhone").value.trim(),
     Business: document.getElementById("fBiz").value.trim(),
     Language: lang,
     Score: r.overall + "/100",
-    Weakest: AREAS[r.weakest[0]].en + " (" + r.weakest[1] + ")",
+    "Weakest area": AREAS[r.weakest[0]].en + " (" + r.weakest[1] + ")",
   };
   QUESTIONS.forEach((q,i)=>{
     payload["Q"+(i+1)+" "+q.en.slice(0,45)] = answers[i]!==null ? q.opts[answers[i]].en : "-";
@@ -576,10 +578,9 @@ function iframeFallback(payload){
       document.body.appendChild(sink);
     }
     const f = document.createElement("form");
-    f.action = "https://formsubmit.co/smlconsulting18@gmail.com";
+    f.action = FORM_ENDPOINT;
     f.method = "POST"; f.target = "sml_sink"; f.style.display = "none";
-    const data = Object.assign({}, payload, { _captcha: "false" });
-    Object.entries(data).forEach(([k,v])=>{
+    Object.entries(payload).forEach(([k,v])=>{
       const i = document.createElement("input"); i.name = k; i.value = v; f.appendChild(i);
     });
     document.body.appendChild(f); f.submit();
