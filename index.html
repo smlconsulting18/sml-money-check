@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script defer src="/_vercel/insights/script.js"></script>
 <title>Business Money Health Check — SML Bookkeeping & Tax</title>
 <meta name="description" content="10 quick questions. 3 minutes. See where your business might be leaking money.">
 <style>
@@ -508,6 +509,7 @@ function showReport(){
     Mobile: document.getElementById("fPhone").value.trim(),
     Business: document.getElementById("fBiz").value.trim(),
     Language: lang,
+    Source: (new URLSearchParams(location.search).get("src") || "direct"),
     Score: r.overall + "/100",
     "Weakest area": AREAS[r.weakest[0]].en + " (" + r.weakest[1] + ")",
   };
