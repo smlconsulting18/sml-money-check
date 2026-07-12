@@ -279,6 +279,8 @@
 <script>
 const FORM_ENDPOINT = "https://api.web3forms.com/submit";
 const W3F_KEY = "2f506de4-a07c-4ff4-a2c0-c5827b616ceb"; // delivers to info@smlbookkeeping.com.au
+// HubSpot CRM auto-capture (double delivery alongside Web3Forms)
+const HS_ENDPOINT = "https://api-ap1.hsforms.com/submissions/v3/integration/submit/443436104/ce7b1978-111f-449a-a699-a9303f30d9cc";
 const PHONE_DISPLAY = "0433 408 886";
 const PHONE_TEL = "tel:+61433408886";
 const CALENDLY = "https://calendly.com/smlconsulting18/60min";
@@ -557,8 +559,29 @@ function copyLink(){
 }
 
 /* Lead delivery with retry + fallback + local backup */
+function sendToHubSpot(payload){
+  try {
+    const full = (payload.name || "").trim();
+    const sp = full.indexOf(" ");
+    const fields = [
+      { objectTypeId: "0-1", name: "firstname", value: sp > 0 ? full.slice(0, sp) : full },
+      { objectTypeId: "0-1", name: "lastname",  value: sp > 0 ? full.slice(sp + 1) : "" },
+      { objectTypeId: "0-1", name: "email",     value: payload.email || "" },
+      { objectTypeId: "0-1", name: "phone",     value: payload.Mobile || "" },
+      { objectTypeId: "0-1", name: "company",   value: payload.Business || "" },
+    ].filter(f => f.value);
+    fetch(HS_ENDPOINT, { method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fields, context: {
+        pageUri: location.href,
+        pageName: "SML Money Health Check — score " + (payload.Score || "") + " · src " + (payload.Source || "direct"),
+      }})
+    }).catch(()=>{});
+  } catch(e){}
+}
 function sendLead(payload){
   try { localStorage.setItem("sml_last_lead", JSON.stringify({ t: Date.now(), payload })); } catch(e){}
+  sendToHubSpot(payload);
   const attempt = (n)=>{
     fetch(FORM_ENDPOINT, { method:"POST",
       headers:{ "Content-Type":"application/json", "Accept":"application/json" },
