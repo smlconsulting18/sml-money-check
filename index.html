@@ -153,6 +153,12 @@
             margin:14px auto 0; max-width:30em; font-style:italic; }
   .whois { font-size:13.5px; line-height:1.7; color:#6b6759; margin:14px auto 0; max-width:34em;
            padding-top:14px; border-top:1px solid #e8e5dd; }
+  .creds { font-size: 10px; letter-spacing: .16em; color: #a8a294; margin-top: 9px;
+    text-transform: uppercase; line-height: 1.9; }
+  .sitefoot { margin-top: 46px; padding-top: 26px; border-top: 1px solid var(--line); text-align: center; }
+  .sf-brand { font-family:'Playfair Display',Georgia,serif; font-size: 15px; letter-spacing: .06em; color: #3a382f; }
+  .sf-line { font-size: 13px; line-height: 1.7; color: #6b6759; margin: 10px auto 14px; max-width: 30em; font-style: italic; }
+  .sf-meta { font-size: 11.5px; line-height: 1.9; color: #a8a294; letter-spacing: .02em; }
   .fine { margin-top: 28px; font-size: 10.5px; color: var(--muted); line-height: 1.6; }
 </style>
 </head>
@@ -164,6 +170,7 @@
         <img src="sml-logo-banner.png" alt="SML Bookkeeping &amp; Tax">
       </a>
       <small data-i18n="tagline">BUSINESS MONEY HEALTH CHECK</small>
+      <div class="creds" data-i18n="creds">FCPA Accountant · Registered Tax Agent · Registered BAS Agent · Melbourne</div>
     </div>
     <button class="lang" onclick="toggleLang()" id="langBtn">中文</button>
     <div class="goldrule"></div>
@@ -299,6 +306,11 @@
     </div>
     <p class="fine" data-i18n="fine">This check is general information, not financial or tax advice. Scores are indicative, based on your answers. Figures described are typical ranges observed in small businesses generally, not a prediction for your business. SML Bookkeeping &amp; Tax.</p>
   </div>
+  <footer class="sitefoot">
+    <div class="sf-brand">SML Bookkeeping &amp; Tax</div>
+    <div class="sf-line" data-i18n="sfLine">Turn a business that can't run without you into an asset — not another job you've given yourself.</div>
+    <div class="sf-meta">Chadstone, Victoria · (03) 9191 3731 · 0433 408 886<br>info@smlbookkeeping.com.au · www.smlconsulting.com.au</div>
+  </footer>
 </div>
 
 <script>
@@ -315,6 +327,8 @@ const I18N = {
  en: {
   tagline:"BUSINESS MONEY HEALTH CHECK",
   h1:"Can your business run without you?",
+  creds:"FCPA Accountant · Registered Tax Agent · Registered BAS Agent · Melbourne",
+  sfLine:"Turn a business that can't run without you into an asset — not another job you've given yourself.",
   slogan:"Turn a business that can't run without you into an asset — not another job you've given yourself.",
   whois:"SML is a licensed accounting practice in Melbourne. We do the books, like everyone else — but the work that matters is different: making sure the business keeps running when you step away.",
   promise:"30 quick questions, 2 minutes. A score out of 100 across five areas — and which one to fix first.",
@@ -364,6 +378,8 @@ const I18N = {
  zh: {
   tagline:"企业财务健康自测",
   h1:"你的生意，离得开你吗？",
+  creds:"FCPA 持牌会计师 · 注册税务代理 · 注册 BAS 代理 · 墨尔本",
+  sfLine:"把离不开你的生意，经营成一份资产——而不是给自己又找了一份工作。",
   slogan:"把离不开你的生意，经营成一份资产——而不是给自己又找了一份工作。",
   whois:"SML 是墨尔本的持牌会计事务所。别人做的账我们也做——但我们真正在做的是另一件事：让老板走得开，生意照样转。",
   promise:"30 道快速选择题，2 分钟。五个方面各出一个分数，满分 100——你会看到哪一块最该先修。",
