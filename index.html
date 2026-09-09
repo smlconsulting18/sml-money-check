@@ -21,10 +21,8 @@
 
   /* header */
   .top { position: relative; text-align: center; }
-  .logoc { display: inline-block; width: 116px; height: 116px; border-radius: 50%;
-    overflow: hidden; border: 1px solid var(--line); box-shadow: 0 8px 26px rgba(20,20,20,.10);
-    background: #fff; }
-  .logoc img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.32); display: block; }
+  .logoc { display: block; width: 100%; max-width: 460px; margin: 0 auto; }
+  .logoc img { width: 100%; height: auto; display: block; }
   .brand small { display: block; font-weight: 600; font-size: 10.5px; color: var(--muted);
     letter-spacing: .3em; margin-top: 12px; }
   .lang { position: absolute; right: 0; top: 4px; border: 1px solid var(--line); background: #fff;
@@ -104,6 +102,17 @@
   .back { background: none; border: none; color: var(--muted); font-size: 14px; cursor: pointer; font-family: inherit; }
   .qcount { color: var(--muted); font-size: 12.5px; letter-spacing: .08em; }
 
+  /* locked report */
+  .rp.locked .weakbox, .rp.locked .hookline, .rp.locked .ctastack, .rp.locked .booksub { display:none; }
+  .rp .unlockbar { display:none; }
+  .rp.locked .unlockbar { display:block; margin-top:22px; text-align:center; }
+  .unlockbar .ub-h { font-size:17px; font-weight:700; margin-bottom:6px; }
+  .unlockbar .ub-p { color:#55524b; font-size:14px; line-height:1.6; margin-bottom:16px; }
+  .unlockbar ul { list-style:none; padding:0; margin:0 0 18px; text-align:left; display:inline-block; }
+  .unlockbar ul li { font-size:14px; color:#55524b; padding:5px 0 5px 22px; position:relative; }
+  .unlockbar ul li::before { content:"🔒"; position:absolute; left:0; font-size:12px; }
+  .rp.locked .share, .rp.locked ~ .share { display:none; }
+
   /* gate */
   .gatecard { margin-top: 30px; background: var(--card); border: 1px solid var(--line); border-radius: 18px;
     padding: 26px 22px; box-shadow: 0 8px 30px rgba(20,20,20,.07); }
@@ -121,7 +130,10 @@
   .rp { background: var(--card); border: 1px solid var(--line); border-radius: 20px;
     padding: 30px 24px; margin-top: 28px; box-shadow: 0 10px 36px rgba(20,20,20,.08); }
   .rgauge { text-align: center; }
-  .rgauge .grade { font-size: 14px; font-weight: 800; margin-top: 2px; letter-spacing: .12em; text-transform: uppercase; }
+  .rgauge .grade { font-size: 18px; font-weight: 800; margin-top: 10px; line-height: 1.4;
+    max-width: 24em; margin-left: auto; margin-right: auto; text-wrap: balance; }
+  .rgauge .gradeexp { font-size: 14.5px; line-height: 1.7; color: #55524b; margin: 10px auto 0;
+    max-width: 27em; }
   .areas { margin-top: 26px; display: grid; gap: 14px; }
   .arow { display: grid; grid-template-columns: 128px 1fr 42px; gap: 12px; align-items: center; font-size: 13.5px; }
   .atrack { height: 8px; background: #f0eee8; border-radius: 5px; overflow: hidden; }
@@ -137,6 +149,10 @@
   .share { margin-top: 24px; text-align: center; font-size: 13px; color: var(--muted); }
   .share button { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 9px 18px;
     font-size: 12.5px; cursor: pointer; font-family: inherit; margin-top: 10px; }
+  .slogan { font-family:'Playfair Display',Georgia,serif; font-size:17px; line-height:1.5; color:#3a382f;
+            margin:14px auto 0; max-width:30em; font-style:italic; }
+  .whois { font-size:13.5px; line-height:1.7; color:#6b6759; margin:14px auto 0; max-width:34em;
+           padding-top:14px; border-top:1px solid #e8e5dd; }
   .fine { margin-top: 28px; font-size: 10.5px; color: var(--muted); line-height: 1.6; }
 </style>
 </head>
@@ -145,7 +161,7 @@
   <div class="top">
     <div class="brand">
       <a class="logoc" href="https://smlbookkeeping.com.au" target="_blank" rel="noopener" title="SML Bookkeeping &amp; Tax">
-        <img src="sml-logo.jpg" alt="SML Bookkeeping &amp; Tax">
+        <img src="sml-logo-banner.png" alt="SML Bookkeeping &amp; Tax">
       </a>
       <small data-i18n="tagline">BUSINESS MONEY HEALTH CHECK</small>
     </div>
@@ -156,7 +172,9 @@
 
   <!-- INTRO -->
   <div class="screen on" id="intro">
-    <h1 class="serif" data-i18n="h1">Is your business quietly leaking money?</h1>
+    <h1 class="serif" data-i18n="h1">Can your business run without you?</h1>
+    <p class="slogan" data-i18n="slogan">Turn a business that can't run without you into an asset — not another job you've given yourself.</p>
+    <p class="whois" data-i18n="whois">SML is a licensed accounting practice in Melbourne. We do the books, like everyone else — but the work that matters is different: making sure the business keeps running when you step away.</p>
     <p class="promise" data-i18n="promise">10 quick questions, 3 minutes. Get a score out of 100 — and see exactly which of the 4 areas to fix first.</p>
     <div class="metaline"><b data-i18n="m1">10 questions</b><span>·</span><b data-i18n="m2">3 minutes</b><span>·</span><b data-i18n="m3">instant score</b></div>
 
@@ -183,7 +201,7 @@
     </div>
 
     <button class="cta" onclick="startQuiz()" data-i18n="start">Start the check →</button>
-    <div class="subnote" data-i18n="startsub">Built by SML Bookkeeping &amp; Tax — CPA Practice &amp; Registered Tax Agent</div>
+    <div class="subnote" data-i18n="startsub">Built by SML Bookkeeping &amp; Tax — FCPA Accountant &amp; Registered Tax Agent</div>
 
     <div class="secT" data-i18n="areasT">The 4 areas we score</div>
     <div class="agrid">
@@ -210,7 +228,7 @@
       <div><span class="tick">✦</span><span data-i18n="g1">Your money health score out of 100 — the moment you finish</span></div>
       <div><span class="tick">✦</span><span data-i18n="g2">All 4 areas scored — cash flow, books, tax and insight, strongest to weakest</span></div>
       <div><span class="tick">✦</span><span data-i18n="g3">Your weakest area pinpointed — and what it's quietly costing you</span></div>
-      <div><span class="tick">🔒</span><span class="lock" data-i18n="g4">Your personalised fix-first plan — unlocked in a free 15-minute call with a CPA</span></div>
+      <div><span class="tick">🔒</span><span class="lock" data-i18n="g4">Your personalised fix-first plan — unlocked in a free 15-minute call with your accountant</span></div>
     </div>
 
     <div class="secT" data-i18n="whoT">Built for owners like you</div>
@@ -244,7 +262,7 @@
       <div class="field"><label data-i18n="fEmail">Email</label><input id="fEmail" type="email" autocomplete="email" required></div>
       <div class="field"><label data-i18n="fPhone">Mobile</label><input id="fPhone" type="tel" autocomplete="tel"></div>
       <div class="field"><label data-i18n="fBiz">Business type (optional)</label><input id="fBiz" type="text"></div>
-      <button class="cta" onclick="showReport()" data-i18n="gateBtn">Show my score →</button>
+      <button class="cta" onclick="unlockReport()" data-i18n="gateBtn">Send me my read-out →</button>
       <p class="priv" data-i18n="priv">We'll email you your report. No spam, no sharing your details — ever. SML Bookkeeping &amp; Tax.</p>
     </div>
   </div>
@@ -261,12 +279,19 @@
           <text x="145" y="150" text-anchor="middle" class="gnum" data-i18n="of" id="ofLabel">out of 100</text>
         </svg>
         <div class="grade" id="rGrade"></div>
+        <p class="gradeexp" id="rGradeExp"></p>
       </div>
       <div class="areas" id="rAreas"></div>
       <div class="weakbox"><b id="rWeakT"></b><p id="rWeakP"></p></div>
       <p class="hookline" id="rHook"></p>
       <div class="ctastack" id="ctaStack"></div>
       <div class="booksub" id="bookSub"></div>
+      <div class="unlockbar">
+        <div class="ub-h" id="ubH">Want to know what to do about it?</div>
+        <div class="ub-p" id="ubP">Your score is yours to keep. The read-out below is what most people actually want.</div>
+        <ul id="ubList"></ul>
+        <button class="cta" onclick="show('gate')" id="ubBtn">Unlock my read-out →</button>
+      </div>
     </div>
     <div class="share">
       <span data-i18n="shareT">Know another business owner who should see their score?</span><br>
@@ -283,19 +308,25 @@ const W3F_KEY = "2f506de4-a07c-4ff4-a2c0-c5827b616ceb"; // delivers to info@smlb
 const HS_ENDPOINT = "https://api-ap1.hsforms.com/submissions/v3/integration/submit/443436104/ce7b1978-111f-449a-a699-a9303f30d9cc";
 const PHONE_DISPLAY = "0433 408 886";
 const PHONE_TEL = "tel:+61433408886";
-const CALENDLY = "https://calendly.com/smlconsulting18/60min";
+const CALENDLY = "https://calendly.com/smlconsulting18/15-mins-quick-intro-call";
 let lang = localStorage.getItem("sml_lang") || "en";
 
 const I18N = {
  en: {
   tagline:"BUSINESS MONEY HEALTH CHECK",
-  h1:"Is your business quietly leaking money?",
-  promise:"10 quick questions, 3 minutes. Get a score out of 100 — and see exactly which of the 4 areas to fix first.",
-  m1:"10 questions", m2:"3 minutes", m3:"instant score",
-  start:"Start the check →", startsub:"Built by SML Bookkeeping & Tax — CPA Practice &amp; Registered Tax Agent",
-  gateH:"Your score is ready.", gateP:"Enter your details to unlock your full score breakdown on the next screen.",
+  h1:"Can your business run without you?",
+  slogan:"Turn a business that can't run without you into an asset — not another job you've given yourself.",
+  whois:"SML is a licensed accounting practice in Melbourne. We do the books, like everyone else — but the work that matters is different: making sure the business keeps running when you step away.",
+  promise:"30 quick questions, 2 minutes. A score out of 100 across five areas — and which one to fix first.",
+  m1:"30 questions", m2:"2 minutes", m3:"instant score",
+  start:"Start the check →", startsub:"Built by SML Bookkeeping & Tax — FCPA Accountant &amp; Registered Tax Agent",
+  gateH:"Where should we send it?", gateP:"We will email your read-out so you still have it next week. No spam, no sharing your details — ever.",
   fName:"Your name", fEmail:"Email", fPhone:"Mobile", fBiz:"Business type (optional)",
-  gateBtn:"Show my score →",
+  gateBtn:"Send me my read-out →",
+  ubH:"So — what do you do about {area}?",
+  ubP:"Your score is yours to keep. What most owners actually want is the next part: what the weakest area means, and what to fix first.",
+  ubBtn:"Send me my read-out →",
+  ubList:["What a low score in {area} usually costs a business like yours","The one thing to fix first — and why that one","A 15-minute call if you want to walk through it"],
   priv:"Your details go straight to the SML team so we can follow up personally. No spam, never shared.",
   of:"out of 100",
   callBtn:"📞 Call now — free 15-minute chat",
@@ -305,22 +336,26 @@ const I18N = {
   shareT:"Know another business owner who should see their score?",
   shareBtn:"Copy the link to share",
   fine:"This check is general information, not financial or tax advice. Scores are indicative, based on your answers. Figures described are typical ranges observed in small businesses generally, not a prediction for your business. SML Bookkeeping & Tax.",
-  grades:{ green:"Healthy — protect it", yellow:"Solid, but leaking", orange:"Money is slipping through", red:"Needs urgent attention" },
-  hook:"Businesses with scores in this range commonly have recoverable leaks — missed deductions, GST coding errors, slow collections — that can add up to thousands of dollars a year. The only way to know your number is to look properly.",
+  grades:{ green:"You are the \u201cCeiling,\u201d not the \u201cPillar.\u201d", yellow:"It runs with or without you, but smoother with you.", orange:"The machine starts failing the moment you look away.", red:"You\u2019re not running a business \u2014 you\u2019ve created a grueling job for yourself." },
+  exp:{ green:"The system is self-propelled. If you disappear for a month, the business keeps running \u2014 or even thrives \u2014 without you.",
+        yellow:"The framework is solid, but the finer details are still being refined. Occasional ripples occur that need your presence to steady the ship.",
+        orange:"You are the essential lubricant. Every detail needs your eyes; without you, the team tends to freeze or malfunction.",
+        red:"The business is physically attached to you. When you stop, the cash flow stops. When you get sick, the business is paralysed." },
+  hook:"Owners who score in this range are rarely short on effort. Usually a handful of things have simply never been written down or handed over — none of them serious on their own, but together they are the reason you can't step away.",
   copied:"Link copied!",
   emailNeed:"Please enter your email so we can send your report.",
   qcount:"Question {n} of 10",
   gaugeCap:"Where will your business land?",
-  areasT:"The 4 areas we score",
+  areasT:"The five areas we score",
   a1:"Cash Flow", a1p:"Who owes you money, how fast invoices go out, who chases them.",
   a2:"Books & Records", a2p:"How current your books are, where receipts live, business vs personal.",
   a3:"Tax & Compliance", a3p:"BAS without the panic, and whether anyone plans your tax before June 30.",
   a4:"Insight & Support", a4p:"Do you know what actually makes money — and is anyone telling you?",
   getsT:"What you'll get",
   g1:"Your money health score out of 100 — the moment you finish",
-  g2:"All 4 areas scored — cash flow, books, tax and insight, strongest to weakest",
+  g2:"All five areas scored — cash flow, books, tax, insight and how much the business depends on you",
   g3:"Your weakest area pinpointed — and what it's quietly costing you",
-  g4:"Your personalised fix-first plan — unlocked in a free 15-minute call with a CPA",
+  g4:"Your personalised fix-first plan — unlocked in a free 15-minute call with your accountant",
   whoT:"Built for owners like you",
   w1:"Tradies & construction", w2:"Cafés & restaurants", w3:"Retail & e-commerce",
   w4:"Clinics & services", w5:"Real estate & trades",
@@ -328,13 +363,19 @@ const I18N = {
  },
  zh: {
   tagline:"企业财务健康自测",
-  h1:"你的生意，正在悄悄漏钱吗？",
-  promise:"10 道选择题，3 分钟。拿到一个百分制评分——四大领域，看清哪一块最该先修。",
-  m1:"10 道题", m2:"3 分钟", m3:"即时出分",
-  start:"开始测评 →", startsub:"由 SML Bookkeeping & Tax 出品 —— CPA 会计师事务所 · 注册税务代理",
-  gateH:"你的分数已生成。", gateP:"留下联系方式，下一屏立即解锁完整评分。",
+  h1:"你的生意，离得开你吗？",
+  slogan:"把离不开你的生意，经营成一份资产——而不是给自己又找了一份工作。",
+  whois:"SML 是墨尔本的持牌会计事务所。别人做的账我们也做——但我们真正在做的是另一件事：让老板走得开，生意照样转。",
+  promise:"30 道快速选择题，2 分钟。五个方面各出一个分数，满分 100——你会看到哪一块最该先修。",
+  m1:"30 道题", m2:"2 分钟", m3:"即时出分",
+  start:"开始测评 →", startsub:"由 SML Bookkeeping & Tax 出品 —— FCPA 持牌会计师 · 注册税务代理",
+  gateH:"解读发到哪里？", gateP:"我们会把解读发到你邮箱，这样下周你还找得到。不发垃圾邮件，也绝不外传你的信息。",
   fName:"称呼", fEmail:"邮箱", fPhone:"手机", fBiz:"行业（选填）",
-  gateBtn:"查看我的分数 →",
+  gateBtn:"把解读发给我 →",
+  ubH:"那么——{area}这一块，具体该怎么办？",
+  ubP:"分数你已经拿到了，可以留着。大部分老板真正想知道的是下一段：最弱的那一块意味着什么、该先动哪一件。",
+  ubBtn:"把解读发给我 →",
+  ubList:["{area}分数低，通常会让一门生意付出什么代价","该先修的那一件——以及为什么是它","如果想当面过一遍，可以约一次 15 分钟通话"],
   priv:"你的信息只会交到 SML 团队手中，用于后续跟进。不骚扰、绝不外传。",
   of:"满分 100",
   callBtn:"📞 一键拨打——免费聊 15 分钟",
@@ -344,8 +385,12 @@ const I18N = {
   shareT:"认识其他也该测一测的老板？",
   shareBtn:"复制链接分享",
   fine:"本测评为一般性信息，不构成财务或税务建议。分数基于你的作答，仅供参考。文中金额为小企业中常见的普遍区间，并非对你企业的预测。SML Bookkeeping & Tax。",
-  grades:{ green:"健康——守住它", yellow:"还行，但在漏", orange:"钱正在流走", red:"需要立即关注" },
-  hook:"这个分数段的企业，普遍存在可挽回的漏损——漏掉的抵扣、GST 编码错误、回款拖延——加起来常见每年数千澳元。想知道你的确切数字，只有认真查一次账。",
+  grades:{ green:"你是公司的\u201c天花板\u201d，而不是\u201c顶梁柱\u201d", yellow:"你在不在都能转，但你在的时候更顺滑", orange:"你一旦不盯着，这台机器就开始掉链子", red:"你不是在做生意，你只是给自己找了份苦差" },
+  exp:{ green:"系统在推着人走。你消失一个月，生意照样转，甚至转得更好。",
+        yellow:"骨架已经稳了，只是细节还在磨合。偶尔会有小波动，需要你回来\u201c定定心\u201d。",
+        orange:"你是那个关键的润滑油。大事小情都得过你的眼，你不在，团队就容易集体\u201c宕机\u201d。",
+        red:"生意长在你身上，你就是公司。你停下，钱就断掉；你生病，生意就瘫痪。" },
+  hook:"分数落在这个区间的老板，通常不是不够努力。多半是有几件事一直没被写下来、也没有交出去——单独看都不算严重，加起来就是你走不开的原因。",
   copied:"链接已复制！",
   emailNeed:"请填写邮箱，报告将发送给你。",
   qcount:"第 {n} 题 / 共 10 题",
@@ -359,7 +404,7 @@ const I18N = {
   g1:"财务健康总分（满分 100）——答完立刻出分",
   g2:"现金流、账务、税务、洞察四大领域逐项评分，强弱一目了然",
   g3:"精准指出你最薄弱的一环，以及它正在悄悄让你付出的代价",
-  g4:"专属修复方案——预约免费 15 分钟通话，CPA 会计师告诉你先修哪里、怎么修",
+  g4:"专属修复方案——预约免费 15 分钟通话，由持牌会计师告诉你先修哪里、怎么修",
   whoT:"为这些老板而做",
   w1:"建筑与技工", w2:"餐饮咖啡", w3:"零售与电商",
   w4:"诊所与服务业", w5:"地产与中介",
@@ -372,6 +417,7 @@ const AREAS = {
  books:{ en:"Books & Records", zh:"账务基础" },
  tax:  { en:"Tax & Compliance", zh:"税务合规" },
  insight:{ en:"Insight & Support", zh:"经营洞察" },
+ owner:{ en:"Owner Dependency", zh:"老板依赖度" },
 };
 
 const WEAK = {
@@ -383,6 +429,8 @@ const WEAK = {
          zh:["税务合规是你最薄弱的一环。","年后报税只是记录历史，不是税务规划。规划只在 6 月 30 日之前有效——过了这天，选项就没了。"] },
  insight:{ en:["Insight & support is your weakest area.","If you only hear from your accountant at tax time, you're paying for compliance — not for advice. The expensive part is what nobody is telling you."],
          zh:["经营洞察是你最薄弱的一环。","如果你的会计一年只在报税时出现，你付的钱只买到了合规，没买到建议。最贵的是那些没人告诉你的事。"] },
+ owner:{ en:["Owner dependency is your weakest area.","The business runs on you — your relationships, your judgement, your hours. That isn't a compliment, it's the ceiling: every decision waits for you, and what you've built can't be handed to anyone else."],
+         zh:["老板依赖度是你最薄弱的一环。","这门生意跑在你身上——你的关系、你的判断、你的时间。这不是夸奖，是天花板：每个决定都要等你，而你建起来的东西，没办法交给别人。"] }
 };
 
 const QUESTIONS = [
@@ -440,6 +488,122 @@ const QUESTIONS = [
           {en:"At BAS or tax time only", zh:"只在报 BAS/报税时", s:4},
           {en:"Only when I chase them", zh:"只有我追他们才理我", s:2},
           {en:"I don't have one", zh:"我还没有会计", s:5} ] },
+ { area:"cash", en:"Can you say how much money has to go OUT this month — before it does?",
+   zh:"这个月还有多少钱要付出去——在真的付出去之前，你说得出来吗？",
+   opts:[ {en:"Yes — I know what's committed and when", zh:"说得出——什么时候付、付多少我清楚", s:10},
+          {en:"Roughly, the big ones", zh:"大概知道几笔大的", s:5},
+          {en:"I find out when it leaves the account", zh:"钱扣掉了我才知道", s:0} ] },
+ { area:"cash", en:"When cash gets tight, how do you usually find out?",
+   zh:"现金最紧的时候，你通常是怎么发现的？",
+   opts:[ {en:"I see it coming weeks ahead", zh:"提前几周就看得到", s:10},
+          {en:"A few days before", zh:"提前几天", s:6},
+          {en:"When a payment bounces or I check the balance", zh:"付款失败，或者查余额时才发现", s:0} ] },
+ { area:"cash", en:"Money customers pay you upfront — deposits, packages, work not delivered yet:",
+   zh:"客户预付给你的钱（订金、套餐、还没做完的服务）：",
+   opts:[ {en:"Held as a liability until the work is done", zh:"记成负债，服务做完了才算收入", s:10},
+          {en:"We don't take payment upfront", zh:"我们没有预收", s:7},
+          {en:"Counted as income when it lands", zh:"钱到账就算收入", s:3},
+          {en:"Not sure how it's recorded", zh:"不太清楚是怎么记的", s:0} ] },
+ { area:"books", en:"How often are your bank accounts reconciled?",
+   zh:"银行账户多久对一次账？",
+   opts:[ {en:"Weekly or better", zh:"每周或更勤", s:10},
+          {en:"Monthly", zh:"每月一次", s:7},
+          {en:"Quarterly, around BAS", zh:"每季度，报 BAS 的时候", s:3},
+          {en:"Once a year, or never", zh:"一年一次，或者从来没有", s:0} ] },
+ { area:"books", en:"Who actually does your bookkeeping?",
+   zh:"你的账实际上是谁在做？",
+   opts:[ {en:"A bookkeeper or accountant, on a regular schedule", zh:"记账员或会计，按固定节奏做", s:10},
+          {en:"Someone in the business, alongside their other job", zh:"公司里的人兼着做", s:6},
+          {en:"Me, at night and on weekends", zh:"我自己，晚上和周末做", s:3},
+          {en:"Nobody until tax time", zh:"报税前没人管", s:0} ] },
+ { area:"books", en:"Last month's profit figure — when can you actually see it?",
+   zh:"上个月的利润数字，你什么时候能真正看到？",
+   opts:[ {en:"Within the first week or two of this month", zh:"这个月头一两周就能看到", s:10},
+          {en:"A month or so later", zh:"大概一个月后", s:6},
+          {en:"At the end of the financial year", zh:"财年结束的时候", s:2},
+          {en:"I've never really looked at it", zh:"我没怎么看过", s:0} ] },
+ { area:"tax", en:"Do you know how much tax is due next, and when?",
+   zh:"下一笔要交的税是多少、什么时候交，你知道吗？",
+   opts:[ {en:"Yes — the amount and the date", zh:"知道——金额和日期都清楚", s:10},
+          {en:"I know the date, not the amount", zh:"知道日期，不知道金额", s:5},
+          {en:"I find out when the notice arrives", zh:"收到通知才知道", s:0} ] },
+ { area:"tax", en:"Do you set money aside for tax and GST?",
+   zh:"你会为税和 GST 单独留钱吗？",
+   opts:[ {en:"Yes — a separate account, every time money comes in", zh:"会——单独一个账户，每次收款就拨过去", s:10},
+          {en:"I try to keep a buffer in the main account", zh:"在主账户里留一点缓冲", s:5},
+          {en:"I deal with it when the bill comes", zh:"账单来了再想办法", s:0} ] },
+ { area:"tax", en:"If you have staff — how do payroll, super and STP get done?",
+   zh:"如果你有员工——payroll、super 和 STP 是怎么处理的？",
+   opts:[ {en:"On time, every time, through proper software", zh:"用正规软件，每次都准时", s:10},
+          {en:"No employees yet", zh:"目前没有员工", s:7},
+          {en:"Mostly on time, with the occasional scramble", zh:"基本准时，偶尔手忙脚乱", s:5},
+          {en:"We've been late on super before", zh:"super 迟交过", s:0} ] },
+ { area:"insight", en:"How often do you actually look at a profit and loss statement?",
+   zh:"你多久真正看一次利润表？",
+   opts:[ {en:"Monthly — and someone talks me through it", zh:"每月看——而且有人跟我讲一遍", s:10},
+          {en:"Monthly, on my own", zh:"每月自己看", s:7},
+          {en:"A few times a year", zh:"一年几次", s:4},
+          {en:"Once a year, if that", zh:"一年一次，甚至更少", s:0} ] },
+ { area:"insight", en:"How did you arrive at your current prices?",
+   zh:"你现在的价格是怎么定出来的？",
+   opts:[ {en:"Costed properly — I know the margin on each job", zh:"算过成本——每单的毛利我清楚", s:10},
+          {en:"Based on what competitors charge", zh:"参考同行的价格", s:5},
+          {en:"They've been the same for years", zh:"很多年没变过了", s:2},
+          {en:"Gut feel", zh:"凭感觉", s:0} ] },
+ { area:"insight", en:"A $50,000 decision lands tomorrow — hire, equipment, a big job. What do you decide on?",
+   zh:"明天要做一个五万块的决定——招人、买设备、接一个大单。你靠什么判断？",
+   opts:[ {en:"Numbers I trust — cash forecast and margins", zh:"靠我信得过的数字——现金预测和毛利", s:10},
+          {en:"I'd ask my accountant first", zh:"先问我的会计", s:7},
+          {en:"Whether there's money in the bank right now", zh:"看账上现在有没有钱", s:3},
+          {en:"Instinct and hope", zh:"直觉，加上赌一把", s:0} ] },
+ { area:"owner", en:"If you took three weeks off — phone off, no messages — what happens to the business?",
+   zh:"如果你连休三周，关机、不回消息——生意会怎样？",
+   opts:[ {en:"It runs fine. Possibly better", zh:"照常运转，甚至可能更好", s:10},
+          {en:"It runs, but growth stops", zh:"转得动，但增长会停", s:7},
+          {en:"It holds, but I come back to a mess", zh:"能撑住，但回来要收拾一堆烂摊子", s:3},
+          {en:"It stalls, and customers would leave", zh:"基本停摆，客户会跑", s:0} ] },
+ { area:"owner", en:"In the last 12 months, have you gone 7 days straight without touching work?",
+   zh:"过去 12 个月，你有没有连续 7 天完全没碰工作？",
+   opts:[ {en:"Three times or more", zh:"三次以上", s:10},
+          {en:"Two or three times", zh:"两三次", s:7},
+          {en:"Once", zh:"有过一次", s:4},
+          {en:"Never", zh:"没有", s:0} ] },
+ { area:"owner", en:"When a client has something important, who do they go to?",
+   zh:"客户遇到重要的事，会去找谁？",
+   opts:[ {en:"The team — I only handle the unusual ones", zh:"找团队，我只处理特殊情况", s:10},
+          {en:"Depends on the issue — about half and half", zh:"看事情，一半一半", s:6},
+          {en:"Mostly me", zh:"大多找我", s:3},
+          {en:"Me, always. They don't trust anyone else with it", zh:"一定找我，找别人他们不放心", s:0} ] },
+ { area:"owner", en:"Of everything you do in a week, how much could genuinely only be done by you?",
+   zh:"你一周做的所有事里，真正只有你能做的占多少？",
+   opts:[ {en:"Not much — most of it someone else could take", zh:"不多——大部分事别人能接", s:10},
+          {en:"Less than half", zh:"一小半", s:6},
+          {en:"More than half", zh:"一大半", s:3},
+          {en:"Nearly all of it", zh:"几乎全部", s:0} ] },
+ { area:"owner", en:"Where do the important processes and judgement calls actually live?",
+   zh:"那些重要的流程和判断标准，实际存在哪里？",
+   opts:[ {en:"Documented, and the team uses them daily", zh:"有文档，团队每天在用", s:10},
+          {en:"Written down, but out of date and incomplete", zh:"写下来了，但不完整也不常更新", s:6},
+          {en:"A few scattered notes and templates", zh:"一些零散的笔记和模板", s:3},
+          {en:"In my head", zh:"在我脑子里", s:0} ] },
+ { area:"owner", en:"If you had to step away for three months — illness, family — who makes the decisions?",
+   zh:"如果你必须离开三个月（生病、家里的事），谁来做决定？",
+   opts:[ {en:"There's a clear arrangement and the team knows it", zh:"有明确安排，团队知道怎么运作", s:10},
+          {en:"One person could carry most of it", zh:"有一个人能顶住大部分", s:7},
+          {en:"Someone runs the day-to-day, but decisions wait for me", zh:"有人管日常，但决定还得等我", s:3},
+          {en:"Nobody. We'd pause, or I'd work through it remotely", zh:"没人，只能停业，或者我远程硬扛", s:0} ] },
+ { area:"owner", en:"Besides you, is there a second person who can deliver a complete, billable piece of work on their own?",
+   zh:"除了你，有没有第二个人能独立完成一次完整的、可以收费的交付？",
+   opts:[ {en:"Two or more", zh:"有两个或以上", s:10},
+          {en:"One person, essentially yes", zh:"有一个人基本能做完", s:6},
+          {en:"One person can do part of it", zh:"有一个人能做其中一部分", s:3},
+          {en:"No", zh:"没有", s:0} ] },
+ { area:"owner", en:"How long before a new person can work independently?",
+   zh:"新人进来，要多久才能独立做事？",
+   opts:[ {en:"Within three months — there are docs and a process", zh:"三个月内，因为有文档和流程", s:10},
+          {en:"Three to six months", zh:"三到六个月", s:6},
+          {en:"Over six months", zh:"半年以上", s:3},
+          {en:"They never really get there without me watching", zh:"很难独立，一直要我盯", s:0} ] },
 ];
 
 let qi = 0;
@@ -479,7 +643,7 @@ function renderQ(){
     d.className = "opt" + (answers[qi]===j ? " sel":"");
     d.textContent = o[lang];
     d.onclick = ()=>{ answers[qi]=j; d.classList.add("sel");
-      setTimeout(()=>{ qi<QUESTIONS.length-1 ? (qi++, renderQ()) : show("gate"); }, 200); };
+      setTimeout(()=>{ qi<QUESTIONS.length-1 ? (qi++, renderQ()) : showScore(); }, 200); };
     box.appendChild(d);
   });
   setProg(Math.round(qi/QUESTIONS.length*90));
@@ -498,7 +662,59 @@ function calc(){
   return { overall, areas, weakest: areas[0] };
 }
 
-function showReport(){
+function encodeAnswers(){
+  return lang + answers.map(a => a===null ? "x" : a).join("");
+}
+function resultLink(){
+  return location.href.split("?")[0] + "?r=" + encodeAnswers();
+}
+function tryRestore(){
+  const raw = new URLSearchParams(location.search).get("r");
+  if(!raw || raw.length < 3) return false;
+  const l = raw.slice(0,2);
+  if(l==="en"||l==="zh"){ lang = l; localStorage.setItem("sml_lang",lang); }
+  const chars = raw.slice(2).split("");
+  if(chars.length !== QUESTIONS.length) return false;
+  chars.forEach((c,i)=>{ answers[i] = c==="x" ? null : parseInt(c,10); });
+  if(answers.some(a=>a===null)) return false;
+  applyLang();
+  showScore();
+  document.querySelector("#report .rp").classList.remove("locked");
+  return true;
+}
+
+function showScore(){
+  const r = calc();
+  const g = r.overall>=80?["green","#2e6b4f"]:r.overall>=60?["yellow","#b07f2a"]:r.overall>=40?["orange","#a9382f"]:["red","#a9382f"];
+  const scoreEl = document.getElementById("rScore");
+  scoreEl.textContent = r.overall; scoreEl.style.fill = g[1];
+  document.getElementById("rGrade").textContent = t("grades")[g[0]];
+  document.getElementById("rGrade").style.color = g[1];
+  document.getElementById("rGradeExp").textContent = t("exp")[g[0]];
+  const arc = document.getElementById("scoreArc");
+  arc.style.stroke = g[1];
+  requestAnimationFrame(()=>{ arc.style.strokeDashoffset = 377 - (377 * r.overall / 100); });
+
+  const ab = document.getElementById("rAreas"); ab.innerHTML = "";
+  [...r.areas].sort((a,b)=>b[1]-a[1]).forEach(([a,v])=>{
+    const col = v>=80?"#2e6b4f":v>=60?"#b07f2a":"#a9382f";
+    ab.innerHTML += `<div class="arow"><span>${AREAS[a][lang]}</span>
+      <div class="atrack"><i style="width:${v}%;background:${col}"></i></div>
+      <span class="aval" style="color:${col}">${v}</span></div>`;
+  });
+
+  const weakName = AREAS[r.weakest[0]][lang];
+  document.getElementById("ubH").textContent = t("ubH").replace("{area}", weakName);
+  document.getElementById("ubP").textContent = t("ubP");
+  document.getElementById("ubBtn").textContent = t("ubBtn");
+  document.getElementById("ubList").innerHTML = t("ubList").map(x=>`<li>${x.replace("{area}", weakName)}</li>`).join("");
+
+  document.querySelector("#report .rp").classList.add("locked");
+  setProg(92);
+  show("report");
+}
+
+function unlockReport(){
   const email = document.getElementById("fEmail").value.trim();
   if(!email || !email.includes("@")){ alert(t("emailNeed")); return; }
   const r = calc();
@@ -514,29 +730,17 @@ function showReport(){
     Source: (new URLSearchParams(location.search).get("src") || "direct"),
     Score: r.overall + "/100",
     "Weakest area": AREAS[r.weakest[0]].en + " (" + r.weakest[1] + ")",
+    ScoreNum: r.overall,
+    WeakestName: AREAS[r.weakest[0]].zh + " / " + AREAS[r.weakest[0]].en,
+    ResultLink: resultLink(),
+    "Result link": resultLink(),
   };
   QUESTIONS.forEach((q,i)=>{
     payload["Q"+(i+1)+" "+q.en.slice(0,45)] = answers[i]!==null ? q.opts[answers[i]].en : "-";
   });
   sendLead(payload);
 
-  const g = r.overall>=80?["green","#2e6b4f"]:r.overall>=60?["yellow","#b07f2a"]:r.overall>=40?["orange","#a9382f"]:["red","#a9382f"];
-  const scoreEl = document.getElementById("rScore");
-  scoreEl.textContent = r.overall;
-  scoreEl.style.fill = g[1];
-  document.getElementById("rGrade").textContent = t("grades")[g[0]];
-  document.getElementById("rGrade").style.color = g[1];
-  const arc = document.getElementById("scoreArc");
-  arc.style.stroke = g[1];
-  requestAnimationFrame(()=>{ arc.style.strokeDashoffset = 377 - (377 * r.overall / 100); });
-
-  const ab = document.getElementById("rAreas"); ab.innerHTML = "";
-  [...r.areas].sort((a,b)=>b[1]-a[1]).forEach(([a,v])=>{
-    const col = v>=80?"#2e6b4f":v>=60?"#b07f2a":"#a9382f";
-    ab.innerHTML += `<div class="arow"><span>${AREAS[a][lang]}</span>
-      <div class="atrack"><i style="width:${v}%;background:${col}"></i></div>
-      <span class="aval" style="color:${col}">${v}</span></div>`;
-  });
+  document.querySelector("#report .rp").classList.remove("locked");
   document.getElementById("rWeakT").textContent = WEAK[r.weakest[0]][lang][0];
   document.getElementById("rWeakP").textContent = WEAK[r.weakest[0]][lang][1];
   document.getElementById("rHook").textContent = t("hook");
@@ -569,6 +773,9 @@ function sendToHubSpot(payload){
       { objectTypeId: "0-1", name: "email",     value: payload.email || "" },
       { objectTypeId: "0-1", name: "phone",     value: payload.Mobile || "" },
       { objectTypeId: "0-1", name: "company",   value: payload.Business || "" },
+      { objectTypeId: "0-1", name: "sml_score",       value: String(payload.ScoreNum || "") },
+      { objectTypeId: "0-1", name: "sml_weakest",     value: payload.WeakestName || "" },
+      { objectTypeId: "0-1", name: "sml_result_link", value: payload.ResultLink || "" },
     ].filter(f => f.value);
     fetch(HS_ENDPOINT, { method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -613,6 +820,7 @@ function iframeFallback(payload){
 }
 
 applyLang();
+if(!tryRestore()){ /* 正常首屏 */ }
 </script>
 </body>
 </html>
