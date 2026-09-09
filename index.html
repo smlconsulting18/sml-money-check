@@ -695,8 +695,24 @@ function tryRestore(){
   if(answers.some(a=>a===null)) return false;
   applyLang();
   showScore();
-  document.querySelector("#report .rp").classList.remove("locked");
+  renderUnlocked(calc());
+  setProg(100);
   return true;
+}
+
+function renderUnlocked(r){
+  document.querySelector("#report .rp").classList.remove("locked");
+  document.getElementById("rWeakT").textContent = WEAK[r.weakest[0]][lang][0];
+  document.getElementById("rWeakP").textContent = WEAK[r.weakest[0]][lang][1];
+  document.getElementById("rHook").textContent = t("hook");
+
+  // adaptive CTA: mobile = call first; desktop = book first
+  const isTouch = matchMedia("(pointer:coarse)").matches;
+  const stack = document.getElementById("ctaStack");
+  const callBtn = (ghost)=>`<a class="cta${ghost?" ghost":""}" href="${PHONE_TEL}">${t("callBtn")}</a>`;
+  const bookBtn = (ghost)=>`<a class="cta${ghost?" ghost":""}" href="${CALENDLY}" target="_blank" rel="noopener">${t("bookBtn")}</a>`;
+  stack.innerHTML = isTouch ? callBtn(false) + bookBtn(true) : bookBtn(false) + callBtn(true);
+  document.getElementById("bookSub").textContent = isTouch ? t("orBook") : t("orCall");
 }
 
 function showScore(){
@@ -756,20 +772,7 @@ function unlockReport(){
   });
   sendLead(payload);
 
-  document.querySelector("#report .rp").classList.remove("locked");
-  document.getElementById("rWeakT").textContent = WEAK[r.weakest[0]][lang][0];
-  document.getElementById("rWeakP").textContent = WEAK[r.weakest[0]][lang][1];
-  document.getElementById("rHook").textContent = t("hook");
-
-  // adaptive CTA: mobile = call first; desktop = book first
-  const isTouch = matchMedia("(pointer:coarse)").matches;
-  const stack = document.getElementById("ctaStack");
-  const callBtn = (ghost)=>`<a class="cta${ghost?" ghost":""}" href="${PHONE_TEL}">${t("callBtn")}</a>`;
-  const bookBtn = (ghost)=>`<a class="cta${ghost?" ghost":""}" href="${CALENDLY}" target="_blank" rel="noopener">${t("bookBtn")}</a>`;
-  // mobile: call first; desktop: book online first (tel: links don't dial on computers)
-  stack.innerHTML = isTouch ? callBtn(false) + bookBtn(true) : bookBtn(false) + callBtn(true);
-  document.getElementById("bookSub").textContent = isTouch ? t("orBook") : t("orCall");
-
+  renderUnlocked(r);
   setProg(100);
   show("report");
 }
